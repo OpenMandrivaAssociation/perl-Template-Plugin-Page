@@ -14,6 +14,7 @@ Source:		%realname-%version.tar.bz2
 BuildRequires:	perl-devel perl-Data-Page
 BuildRequires:  perl-Template-Toolkit
 BuildArch:	noarch
+Buildroot:	%_tmppath/%name-root
 
 %description
 When searching through large amounts of data, it is often the case
