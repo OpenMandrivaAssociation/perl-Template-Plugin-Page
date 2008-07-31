@@ -1,7 +1,7 @@
 %define realname Template-Plugin-Page
 %define name perl-%realname
 %define version 0.10
-%define release %mkrel 5
+%define release %mkrel 6
 
 Summary:	A plugin to help when paging through sets of results
 Name:		%name
