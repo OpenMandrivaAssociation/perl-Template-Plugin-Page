@@ -1,20 +1,20 @@
-%define realname Template-Plugin-Page
-%define name perl-%realname
-%define version 0.10
-%define release %mkrel 6
+%define upstream_name    Template-Plugin-Page
+%define upstream_version 0.10
+
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
 
 Summary:	A plugin to help when paging through sets of results
-Name:		%name
-Version:	%version
-Release:	%release
 License:	Artistic/GPL
 Group:		Development/Perl
-URL:		http://search.cpan.org/dist/%realname/
-Source:		%realname-%version.tar.bz2
-BuildRequires:	perl-devel perl-Data-Page
+Url:		http://search.cpan.org/dist/%{upstream_name}/
+Source0:	http://www.cpan.org/modules/by-module/Template/%{upstream_name}-%{upstream_version}.tar.bz2
+
+BuildRequires:	perl-Data-Page
 BuildRequires:  perl-Template-Toolkit
 BuildArch:	noarch
-Buildroot:	%_tmppath/%name-root
+Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 When searching through large amounts of data, it is often the case
@@ -29,7 +29,7 @@ call methods to find out how many pages of information there are, and
 what number the first and last entries on the current page really are.
 
 %prep
-%setup -q -n %realname-%version
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -42,12 +42,11 @@ make test
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %files
 %defattr(-,root,root)
 %doc README Changes
 %perl_vendorlib/Template/Plugin/*
 %_mandir/*/*
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
