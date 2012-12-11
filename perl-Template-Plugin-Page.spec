@@ -1,9 +1,9 @@
 %define upstream_name    Template-Plugin-Page
 %define upstream_version 0.10
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 1
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	2
 
 Summary:	A plugin to help when paging through sets of results
 License:	Artistic/GPL
@@ -11,10 +11,10 @@ Group:		Development/Perl
 Url:		http://search.cpan.org/dist/%{upstream_name}/
 Source0:	http://www.cpan.org/modules/by-module/Template/%{upstream_name}-%{upstream_version}.tar.bz2
 
-BuildRequires:	perl-Data-Page
-BuildRequires:  perl-Template-Toolkit
+BuildRequires:	perl-devel
+BuildRequires:	perl(Data::Page)
+BuildRequires:  perl(Template)
 BuildArch:	noarch
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 When searching through large amounts of data, it is often the case
@@ -32,21 +32,48 @@ what number the first and last entries on the current page really are.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
-%{make}
+perl Makefile.PL INSTALLDIRS=vendor
+%make
 
 %check
 make test
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root)
 %doc README Changes
-%perl_vendorlib/Template/Plugin/*
-%_mandir/*/*
+%{perl_vendorlib}/Template/Plugin/*
+%{_mandir}/*/*
+
+%changelog
+* Mon Aug 03 2009 JÃ©rÃ´me Quelin <jquelin@mandriva.org> 0.100.0-1mdv2010.0
++ Revision: 408083
+- rebuild using %%perl_convert_version
+
+* Thu Jul 31 2008 Thierry Vignaud <tvignaud@mandriva.com> 0.10-6mdv2009.0
++ Revision: 258476
+- rebuild
+
+* Thu Jul 24 2008 Thierry Vignaud <tvignaud@mandriva.com> 0.10-5mdv2009.0
++ Revision: 246507
+- rebuild
+
+* Wed Jan 02 2008 Olivier Blin <oblin@mandriva.com> 0.10-3mdv2008.1
++ Revision: 140717
+- restore BuildRoot
+
+  + Thierry Vignaud <tvignaud@mandriva.com>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Sat Sep 15 2007 Guillaume Rousse <guillomovitch@mandriva.org> 0.10-3mdv2008.0
++ Revision: 86943
+- rebuild
+
+
+* Mon Jan 16 2006 Nicolas Lécureuil <neoclust@mandriva.org> 0.10-2mdk
+- Add BuildRequires: perl-Template-Toolkit
+
+* Sun Jan 15 2006 Frederic Lepied <flepied@mandriva.com> 0.10-1mdk
+- Initial package
+
