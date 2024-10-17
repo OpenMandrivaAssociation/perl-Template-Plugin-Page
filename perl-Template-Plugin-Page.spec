@@ -8,7 +8,7 @@ Release:	4
 Summary:	A plugin to help when paging through sets of results
 License:	Artistic/GPL
 Group:		Development/Perl
-Url:		http://search.cpan.org/dist/%{upstream_name}/
+Url:		https://search.cpan.org/dist/%{upstream_name}/
 Source0:	http://www.cpan.org/modules/by-module/Template/%{upstream_name}-%{upstream_version}.tar.bz2
 
 BuildRequires:	perl-devel
